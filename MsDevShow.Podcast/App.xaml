@@ -1,0 +1,13 @@
+﻿<Application
+    x:Class="MsDevShow.Podcast.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MsDevShow.Podcast"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="MsDevShowBlue" Color="#329FD9"></SolidColorBrush>
+        <SolidColorBrush x:Key="MsDevShowRed" Color="#EF512B"></SolidColorBrush>
+    </Application.Resources>
+    
+</Application>

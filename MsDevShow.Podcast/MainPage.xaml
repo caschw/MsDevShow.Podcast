@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="MsDevShow.Podcast.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MsDevShow.Podcast"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:MsDevShow.Podcast.Converters"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:DateToShortDateStringConverter x:Key="DateToStringConverter" />
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <StackPanel>
+                <Grid x:Name="Header" Background="{StaticResource MsDevShowBlue}" Height="70" Width="{Binding ActualWidth, ElementName=LayoutRoot, Mode=TwoWay}" VerticalAlignment="Top">
+                    <TextBlock x:Uid="PodcastTitle" Text="MS Dev Show" FontFamily="/Fonts/minecrafter_3-webfont.ttf#Minecrafter 3" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource MsDevShowRed}" Margin="0,20,0,0" ></TextBlock>
+                </Grid>
+                <TextBlock x:Name="feedText"></TextBlock>
+                <ListView x:Name="Feeds" RelativePanel.Below="Header" ItemsSource="{Binding}" IsSwipeEnabled="True">
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <StackPanel Tapped="StackPanel_Tapped">
+                                <TextBlock x:Name="FeedItemPubDate" Text="{Binding PublicationDate, Converter={StaticResource DateToStringConverter}}" FontFamily="/Fonts/Lato-Regular.ttf#Lato" Margin="0,0,5,0" />
+                                <RelativePanel>
+                                    <TextBlock x:Name="DurationText" Text="Duration:" Margin="0,0,1,0" FontSize="10" FontFamily="/Fonts/DenXian.ttf#DenXian" />
+                                    <TextBlock x:Name="FeedItemDuration" RelativePanel.RightOf="DurationText" FontSize="10" Text="{Binding Duration}" />
+                                </RelativePanel>
+                                <!--<TextBlock Text="{Binding Title}" TextWrapping="WrapWholeWords" RelativePanel.RightOf="FeedItemPubDate" />-->
+                                <TextBlock x:Name="FeedItemTitle" Margin="0,0,5,0" TextWrapping="WrapWholeWords" FontFamily="/Fonts/Lato-Regular.ttf#Lato" >
+                                    <TextBlock.Inlines>
+                                        <Hyperlink NavigateUri="{Binding Link}">
+                                            <Run Text="{Binding Title}"></Run>
+                                        </Hyperlink>
+                                    </TextBlock.Inlines>
+                                </TextBlock>
+                                <TextBlock x:Name="FeedItemDescription" FontFamily="/Fonts/Lato-Regular.ttf#Lato"  Text="{Binding Description}" TextWrapping="WrapWholeWords" Margin="0,0,0,10" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
